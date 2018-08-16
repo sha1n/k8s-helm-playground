@@ -10,6 +10,10 @@ import (
 	"syscall"
 )
 
+func init() {
+	log.SetFlags(log.Ldate | log.Lmicroseconds | log.Lshortfile | log.Ltime | log.LUTC)
+}
+
 func main() {
 	server := createHttpServer(8080)
 	server.StartAsync()
@@ -19,7 +23,9 @@ func main() {
 func awaitShutdownSig() {
 	quitChannel := make(chan os.Signal)
 	signal.Notify(quitChannel, syscall.SIGINT, syscall.SIGTERM)
+
 	log.Println("Waiting for shutdown signal...")
+
 	<-quitChannel
 }
 
