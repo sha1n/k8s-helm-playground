@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/sha1n/k8s-helm-playground/config"
 	"github.com/sha1n/k8s-helm-playground/http"
 	"github.com/sha1n/k8s-helm-playground/sys"
 	"github.com/sha1n/k8s-helm-playground/web"
@@ -17,6 +18,9 @@ func init() {
 func main() {
 	server := createHttpServer(8080)
 	server.StartAsync()
+
+	config.StartConfigMonitor()
+
 	awaitShutdownSig()
 }
 
