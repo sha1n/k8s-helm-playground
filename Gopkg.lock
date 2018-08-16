@@ -61,12 +61,6 @@
   version = "v1.0.0"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/sha1n/go-playground"
-  packages = ["utils"]
-  revision = "c957718ddb02eabe06ae4005fcff51ce0e05b6d4"
-
-[[projects]]
   name = "github.com/stretchr/testify"
   packages = ["assert"]
   revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
@@ -99,6 +93,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "5cda9af42b8c3d51420ff9cb1867c4f39c228a533222488804696ea17ee53130"
+  inputs-digest = "92b1768adaa3c5f8e2ba779a1c43877759fc17b685d72521bbf28c3ed9b5f445"
   solver-name = "gps-cdcl"
   solver-version = 1

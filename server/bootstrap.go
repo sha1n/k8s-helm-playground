@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/sha1n/k8s-helm-playground/config"
-	"github.com/sha1n/k8s-helm-playground/http"
-	"github.com/sha1n/k8s-helm-playground/sys"
-	"github.com/sha1n/k8s-helm-playground/web"
+	"github.com/sha1n/k8s-helm-playground/server/config"
+	"github.com/sha1n/k8s-helm-playground/server/http"
+	"github.com/sha1n/k8s-helm-playground/server/sys"
+	"github.com/sha1n/k8s-helm-playground/server/web"
 	"log"
 	"os"
 	"os/signal"

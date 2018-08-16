@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/sha1n/go-playground/utils"
+	"github.com/sha1n/k8s-helm-playground/server/utils"
 	"github.com/stretchr/testify/assert"
 	"net"
 	"net/http"

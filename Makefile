@@ -1,30 +1,45 @@
+NOCOL=\x1b[0m
+GREEN=\x1b[32;01m
+RED=\x1b[31;01m
+YELLOW=\x1b[33;01m
+
+define print_title
+	@echo "---"
+	@echo "--- $(GREEN)$1$(NOCOL)"
+	@echo "---"
+endef
+
+default:
+	go get -t ./...
+	make test
+
 test:
-	echo Running tests...
+	$(call print_title, Running tests...)
 	go test -v `go list ./...`
 
 build:
-	echo Building binaries...
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/echo-server github.com/sha1n/k8s-helm-playground
-	echo Building docker image...
-	docker build -t sha1n/echo-server .
+	$(call print_title,Building binaries...)
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o server/bin/echo-server github.com/sha1n/k8s-helm-playground/server
+	$(call print_title,Building docker image...)
+	docker build -t sha1n/echo-server server
 
 prepare:
-	echo Preparing dependencies...
+	$(call print_title,Preparing go dependencies...)
 	dep ensure -v
 
 format:
-	echo Formatting source code...
-	gofmt -s -w .
+	$(call print_title,Formatting go sources...)
+	gofmt -s -w server
 
 lint:
-	echo Running lint...
-	gofmt -d .
+	$(call print_title,Lint...)
+	gofmt -d server
 
 run:
-	go run main.go
+	go run server/bootstrap.go
 
 push-docker:
-	echo Pushing docker image to registry...
+	$(call print_title,Publishing docker image...)
 	docker push sha1n/echo-server:latest
 
 run-docker:

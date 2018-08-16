@@ -1,4 +1,6 @@
 FROM alpine:3.7
+LABEL author="sha1n"
+LABEL description="an alpine based echo server used for testing purposes"
 
 RUN apk update
 

@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/sha1n/k8s-helm-playground/sys"
+	"github.com/sha1n/k8s-helm-playground/server/sys"
 	"io/ioutil"
 	"log"
 	"syscall"
