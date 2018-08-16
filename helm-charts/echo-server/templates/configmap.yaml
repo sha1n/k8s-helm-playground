@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Values.namespace.name }}
+  name: {{ template "echo-server.fullname" . }}
+  labels:
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app: {{ template "echo-server.name" . }}
+  type: Opaque
+  chart: {{ template "echo-server.chart" . }}
+  release: {{ .Release.Name }}
+  heritage: {{ .Release.Service }}
+data:
+  test-config.txt: {{ .Values.config.test }}

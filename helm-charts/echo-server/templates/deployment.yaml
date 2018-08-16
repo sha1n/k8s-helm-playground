@@ -19,6 +19,8 @@ spec:
       labels:
         app: {{ template "echo-server.name" . }}
         release: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -36,6 +38,9 @@ spec:
             httpGet:
               path: /health
               port: http
+          volumeMounts:
+            - mountPath: /configs
+              name: configmap-volume
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
@@ -50,3 +55,8 @@ spec:
       tolerations:
 {{ toYaml . | indent 8 }}
     {{- end }}
+      volumes:
+        - name: configmap-volume
+          configMap:
+            name: {{ template "echo-server.fullname" . }}
+
