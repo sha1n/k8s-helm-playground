@@ -6,11 +6,7 @@ kind: Ingress
 metadata:
   namespace: {{ .Values.namespace.name }}
   name: {{ $fullName }}
-  labels:
-    app: {{ template "echo-server.name" . }}
-    chart: {{ template "echo-server.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+  {{- template "chart.labels" . }}
 {{- with .Values.ingress.annotations }}
   annotations:
 {{ toYaml . | indent 4 }}

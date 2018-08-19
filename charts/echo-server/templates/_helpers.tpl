@@ -5,6 +5,15 @@ Expand the name of the chart.
 {{- define "echo-server.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+{{/* Generates default labels */}}
+{{- define "chart.labels" }}
+  labels:
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app: {{ template "echo-server.name" . }}
+    creator: helm
+{{- end }}
 
 {{/*
 Create a default fully qualified app name.

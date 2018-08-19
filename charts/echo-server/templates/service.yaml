@@ -3,11 +3,7 @@ kind: Service
 metadata:
   namespace: {{ .Values.namespace.name }}
   name: {{ template "echo-server.fullname" . }}
-  labels:
-    app: {{ template "echo-server.name" . }}
-    chart: {{ template "echo-server.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+  {{- template "chart.labels" . }}
 spec:
   type: {{ .Values.service.type }}
   ports:
