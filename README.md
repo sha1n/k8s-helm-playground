@@ -4,26 +4,35 @@
 
 This repo is a k8s helm playground for experimentation  
 
-
-## Build 
-```
-docker login --username=XXX
+## Build Binaries 
+```bash
+docker login --username=$DOCKERHUB_USER
 ...
 
-# Build go server, docker image and publish
+# Build and publish test server docker image
 make release
-
-# Package helm chart
-helm package charts/echo-server
 ```
 
-## Install 
+## Helm Setup
+```bash
+minikube start
+
+# Setup helm and tiller
+./helm-setup.sh
 ```
-NSNAME=helm-nsx
 
-# Create kube namespace
-helm install --set namespace.name=$NSNAME charts/namespace/namespace-0.1.0.tgz
+## Deployment Demo
+```bash
+# Package helm charts (local) 
+make package-charts
 
-# upgrade/install chart
-helm upgrade --install --set config.test=v1 --set namespace.name=$NSNAME echo-server-$NSNAME charts/echo-server/echo-server-0.1.8.tgz
+# Install global objects
+./helm-install-globals.sh
+
+# Install namespace objects
+./helm-install-namespace.sh demo
+
+# Upgrade all demo charts (doesn't really do anything) 
+./helm-upgrade-all.sh demo
+
 ```
