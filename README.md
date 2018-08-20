@@ -22,7 +22,7 @@ helm package charts/echo-server
 NSNAME=helm-nsx
 
 # Create kube namespace
-kubectl create namespace $NSNAME
+helm install --set namespace.name=$NSNAME charts/namespace/namespace-0.1.0.tgz
 
 # upgrade/install chart
 helm upgrade --install --set config.test=v1 --set namespace.name=$NSNAME echo-server-$NSNAME charts/echo-server/echo-server-0.1.8.tgz
