@@ -33,7 +33,7 @@ read NSNAME
 
 bold Going to create namespace $NSNAME
 sleep 1
-helm install --set namespace.name=$NSNAME charts/namespace/namespace-0.1.0.tgz
+helm install --name $NSNAME --set namespace.name=$NSNAME charts/namespace/namespace-0.1.0.tgz
 check_status
 
 
