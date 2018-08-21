@@ -1,8 +1,15 @@
 [![Build Status](https://travis-ci.org/sha1n/k8s-helm-playground.svg?branch=master)](https://travis-ci.org/sha1n/k8s-helm-playground)
 
 # k8s Helm Playground
-
 This repo is a k8s helm playground for experimentation  
+
+Tested with: 
+* MacOS 10.13.6
+* Docker client version 18.06.0-ce
+* Kubernetes version 1.10.0 (minikube)
+* Helm version 2.9.1
+* Go version 1.10.3
+
 
 ## Build Binaries 
 ```bash
