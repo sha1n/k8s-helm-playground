@@ -34,5 +34,12 @@ make package-charts
 
 # Upgrade all demo charts (doesn't really do anything) 
 ./helm-upgrade-all.sh demo
+```
 
+## Nested Charts Example
+```bash
+# Package helm charts (local) 
+make package-charts
+
+helm upgrade --install --set global.namespace.name=nesting-demo nesting-demo packages/nesting-example-0.1.0.tgz
 ```

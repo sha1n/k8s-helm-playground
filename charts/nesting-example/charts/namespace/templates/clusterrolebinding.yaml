@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Values.global.namespace.name }}-editor
+  namespace: ""
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: namespace-editor
+subjects:
+- kind: ServiceAccount
+  name: namespace-manager
+  namespace: {{ .Values.global.namespace.name }}

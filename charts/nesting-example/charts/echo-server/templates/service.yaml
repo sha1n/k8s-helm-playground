@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Values.global.namespace.name }}
+  name: {{ template "echo-server.fullname" . }}
+  {{- template "chart.labels" . }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ template "echo-server.name" . }}
+    release: {{ .Release.Name }}

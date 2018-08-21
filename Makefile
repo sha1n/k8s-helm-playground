@@ -31,6 +31,7 @@ package-charts:
     $(shell helm package charts/global -d $(PACKAGES))
     $(shell helm package charts/namespace -d $(PACKAGES))
     $(shell helm package charts/echo-server -d $(PACKAGES))
+    $(shell helm package charts/nesting-example -d $(PACKAGES))
 
 prepare:
 	$(call print_title,Preparing go dependencies...)
