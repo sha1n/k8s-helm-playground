@@ -10,55 +10,51 @@ define print_title
 	@echo "---"
 endef
 
-default:
+
+default: get test
+
+get:
 	go get -t ./...
-	make test
 
 test:
 	$(call print_title, Running tests...)
 	go test -v `go list ./...`
 
+
 build:
 	$(call print_title,Building binaries...)
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o server/bin/echo-server github.com/sha1n/k8s-helm-playground/server
-
 	$(call print_title,Building docker image...)
 	docker build -t sha1n/echo-server server
 
-package-charts:
-	$(call print_title,Packaging charts...)
-    $(shell mkdir $(PACKAGES))
-    $(shell helm package charts/global -d $(PACKAGES))
-    $(shell helm package charts/namespace -d $(PACKAGES))
-    $(shell helm package charts/echo-server -d $(PACKAGES))
-    $(shell helm package charts/nesting-example -d $(PACKAGES))
 
 prepare:
 	$(call print_title,Preparing go dependencies...)
 	dep ensure -v
 
+
 format:
 	$(call print_title,Formatting go sources...)
 	gofmt -s -w server
+
 
 lint:
 	$(call print_title,Lint...)
 	gofmt -d server
 
+
 run:
 	go run server/bootstrap.go
+
 
 push-docker:
 	$(call print_title,Publishing docker image...)
 	docker push sha1n/echo-server:latest
 
+
 run-docker:
 	docker run -d -p 8080:8080 sha1n/echo-server
 
-release:
-	make prepare
-	make format
-	make lint
-	make test
-	make build
-	make push-docker
+
+release: prepare format lint test build push-docker
+

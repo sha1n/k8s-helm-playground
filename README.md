@@ -10,6 +10,12 @@ Tested with:
 * Helm version 2.9.1
 * Go version 1.10.3
 
+## Prerequisites
+```bash
+brew cask install virtualbox
+brew cask install minikube
+brew install kubernetes-helm
+```
 
 ## Build Binaries 
 ```bash
@@ -31,7 +37,7 @@ minikube start
 ## Deployment Demo
 ```bash
 # Package helm charts (local) 
-make package-charts
+./helm-package.sh
 
 # Install global objects
 ./helm-install-globals.sh
@@ -46,7 +52,7 @@ make package-charts
 ## Nested Charts Example
 ```bash
 # Package helm charts (local) 
-make package-charts
+./helm-package.sh
 
 helm upgrade --install --set global.namespace.name=nesting-demo nesting-demo packages/nesting-example-0.1.0.tgz
 ```
