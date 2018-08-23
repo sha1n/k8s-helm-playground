@@ -37,6 +37,7 @@ func createHttpServer(port int) http.Server {
 	server := http.
 		NewServer(port).
 		WithGetHandler("/health", web.HandleHealthCheck).
+		WithGetHandler("/ready", web.HandleReadinessCheck).
 		WithPostHandler("/echo", web.HandleEcho).
 		WithGetHandler("/echo", web.HandleEcho).
 		Build()

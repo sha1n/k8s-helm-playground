@@ -37,10 +37,18 @@ spec:
             httpGet:
               path: /health
               port: http
+            initialDelaySeconds: 1
+            periodSeconds: 3
+            successThreshold: 1
+            timeoutSeconds: 1
           readinessProbe:
             httpGet:
-              path: /health
+              path: /ready
               port: http
+            initialDelaySeconds: 10
+            periodSeconds: 1
+            successThreshold: 1
+            timeoutSeconds: 1
           volumeMounts:
             - mountPath: /configs
               name: configmap-volume
