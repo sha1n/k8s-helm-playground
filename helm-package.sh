@@ -11,10 +11,14 @@ else
 fi
 
 
-PKG_DIR=packages
+PKG_DIR=local_repo
 
 mkdir $PKG_DIR
+
+bold Packaging charts...
+
 helm package charts/global --app-version $APPVER -d $PKG_DIR
 helm package charts/namespace --app-version $APPVER -d $PKG_DIR
 helm package charts/echo-server --app-version $APPVER -d $PKG_DIR
 helm package charts/nesting-example --app-version $APPVER -d $PKG_DIR
+check_status

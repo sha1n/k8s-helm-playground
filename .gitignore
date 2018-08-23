@@ -15,4 +15,4 @@ bin
 *.out
 
 # Helm charts packages
-packages
+local_repo

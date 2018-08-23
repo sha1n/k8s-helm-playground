@@ -36,8 +36,8 @@ minikube start
 
 ## Demo Scripts
 ```bash
-# Package helm charts (local) 
-./helm-package.sh
+# Package and serve helm charts 
+./helm-serve.sh
 
 # Install global objects
 ./helm-install-globals.sh
@@ -52,8 +52,8 @@ minikube start
 
 ## Nested Charts Example
 ```bash
-# Package helm charts (local) 
-./helm-package.sh
+# Package and serve helm charts
+./helm-serve.sh
 
-helm upgrade --install --set global.namespace.name=nesting-demo nesting-demo packages/nesting-example-0.1.0.tgz
+helm upgrade --install --set global.namespace.name=nesting-demo nesting-demo local/nesting-example-0.1.0.tgz
 ```
