@@ -26,6 +26,8 @@ check_status
 bold Deploying echo-server-$NSNAME
 helm upgrade --namespace $NSNAME --set namespace.name=$NSNAME echo-server-$NSNAME packages/echo-server-0.1.0.tgz
 check_status
+bold "Running tests for echo-server-$NSNAME..."
+helm test --cleanup echo-server-$NSNAME
 
 bold Deploying echo-server-ingress-$NSNAME with ingress enabled
 helm upgrade --namespace $NSNAME --set config.test=ingress.v1 --set ingress.enabled=true --set namespace.name=$NSNAME echo-server-ingress-$NSNAME packages/echo-server-0.1.0.tgz

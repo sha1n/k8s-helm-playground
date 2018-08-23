@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ template "echo-server.fullname" . }}-negative-service-test"
+  labels:
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/name: {{ template "echo-server.name" . }}
+  annotations:
+    helm.sh/hook: test-failure
+spec:
+  containers:
+  - name: exit1
+    image: alpine:3.7
+    command: ['exit 1']
+  restartPolicy: Never

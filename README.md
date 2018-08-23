@@ -34,7 +34,7 @@ minikube start
 ./helm-setup.sh
 ```
 
-## Deployment Demo
+## Demo Scripts
 ```bash
 # Package helm charts (local) 
 ./helm-package.sh
@@ -42,10 +42,11 @@ minikube start
 # Install global objects
 ./helm-install-globals.sh
 
-# Install namespace objects
+#
+# Install/upgrade charts bound to the same namespace.
+# These scripts demonstrate helm install/upgrade commands with values overriding and basic usage of the helm test functionality.
+#
 ./helm-install-namespace.sh demo
-
-# Upgrade all demo charts (doesn't really do anything) 
 ./helm-upgrade-all.sh demo
 ```
 
