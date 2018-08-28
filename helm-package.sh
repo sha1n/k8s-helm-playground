@@ -18,7 +18,12 @@ mkdir $PKG_DIR
 bold Packaging charts...
 
 helm package charts/global --app-version $APPVER -d $PKG_DIR
+check_status
 helm package charts/namespace --app-version $APPVER -d $PKG_DIR
+check_status
 helm package charts/echo-server --app-version $APPVER -d $PKG_DIR
+check_status
 helm package charts/nesting-example --app-version $APPVER -d $PKG_DIR
+check_status
+helm package charts/dummy-loader --app-version $APPVER -d $PKG_DIR
 check_status

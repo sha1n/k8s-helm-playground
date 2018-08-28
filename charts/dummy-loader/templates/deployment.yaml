@@ -1,0 +1,63 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace.name }}
+  name: {{ template "dummy-loader.fullname" . }}
+  {{- template "chart.labels" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 2
+  selector:
+    matchLabels:
+      app: {{ template "dummy-loader.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "dummy-loader.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      serviceAccountName: namespace-manager
+      serviceAccount: namespace-manager
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 3
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 1
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
