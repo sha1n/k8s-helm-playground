@@ -57,3 +57,15 @@ minikube start
 
 helm upgrade --install --set global.namespace.name=nesting-demo nesting-demo local/nesting-example-0.1.0.tgz
 ```
+
+## Pod AutoScaling Example
+```bash
+# If you're running on minikube, I would recommend to enable the heapster addon
+minikube addons enable heapster
+minikube addons open heapster
+
+
+./helm-serve.sh
+
+./helm-setup-loader.sh hpa
+``` 
