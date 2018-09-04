@@ -27,3 +27,5 @@ helm package charts/nesting-example --app-version $APPVER -d $PKG_DIR
 check_status
 helm package charts/dummy-loader --app-version $APPVER -d $PKG_DIR
 check_status
+helm package charts/node-problem-detector --app-version $APPVER -d $PKG_DIR
+check_status
